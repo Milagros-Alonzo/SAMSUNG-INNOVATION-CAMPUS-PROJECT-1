@@ -1,0 +1,24 @@
+# Entorno Virtual (¡NECESARIO IGNORAR!)
+venv/
+
+
+# Archivos de caché y temporales de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de Jupyter/IPython (¡NECESARIO IGNORAR!)
+.ipynb_checkpoints/
+*~
+
+# Archivos de macOS (si usas Mac)
+.DS_Store
+
+# Archivos de datos GRANDES (Recomendado IGNORAR para GitHub)
+# No queremos subir el dataset completo a GitHub.
+Data_Analisis_Studest/Data/
+
+# Resultados y modelos (Depende, pero a menudo son grandes)
+results/
+.model/
