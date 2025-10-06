@@ -17,7 +17,7 @@ __pycache__/
 
 # Archivos de datos GRANDES (Recomendado IGNORAR para GitHub)
 # No queremos subir el dataset completo a GitHub.
-Data_Analisis_Studest/Data/
+Data_Analisis_Student/Data/
 
 # Resultados y modelos (Depende, pero a menudo son grandes)
 results/
