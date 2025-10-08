@@ -1,9 +1,23 @@
-from . import mapping_builder, data_prep, features
+from data_prep import clean_data
+from features import generate_plots
+from data_audit import audit_data
+from log import logger
 
+def run_pipeline():
+    try:
+        logger.info("Iniciando el proceso de limpieza de datos.")
+        df_cleaned = clean_data()
+
+        logger.info("Generando gráficos.")
+        generate_plots(df_cleaned)
+
+        logger.info("Auditando los datos.")
+        audit_data()
+
+        logger.info("Proceso completado con éxito.")
+    except Exception as e:
+        logger.error(f"Error en el pipeline: {e}")
+        
+# Ejecutar el pipeline
 if __name__ == "__main__":
-    # 1) Detectar columnas y generar mapping
-    mapping_builder.run()
-    # 2) Limpieza del CSV
-    data_prep.run()
-    # 3) Agregados finales
-    features.run()
+    run_pipeline()
