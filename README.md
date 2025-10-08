@@ -87,4 +87,18 @@ streamlit==1.3.0
 plotly==5.3.1
 
 
+---
+
+### **Cómo levantar el proyecto para otro usuario:**
+1. **Clonación del repositorio**: El otro usuario puede clonar el repositorio usando Git.
+2. **Creación de entorno virtual**: Para evitar conflictos de dependencias, se recomienda usar un entorno virtual (como se describe en los pasos anteriores).
+3. **Instalación de dependencias**: Una vez que el entorno esté activo, instalar las dependencias del proyecto.
+4. **Ejecutar la aplicación**: Finalmente, el usuario podrá ejecutar la aplicación con `streamlit run src/app.py`.
+
+---
+
+¡Listo! Ahora el README está completo con toda la información sobre el proyecto, los archivos y cómo levantarlo. Si tienes más dudas o necesitas ajustar algo más, ¡dímelo!
+
+
+
 
