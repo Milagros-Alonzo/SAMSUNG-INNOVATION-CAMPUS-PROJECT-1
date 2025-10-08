@@ -1,61 +1,20 @@
-from __future__ import annotations
-import json
 import pandas as pd
-from .config import RAW_DATA, INTERIM_CSV, MAPPING_FILE
-from .log import Logger
+from config import INTERIM_CSV
+from mapping_builder import process_mapping
 
-log = Logger("data_prep")
-
-def run() -> None:
-    mapping = _load_mapping()
-    df = _read_raw()
-
-    # Renombrar SOLO columnas monetarias (según mapping)
-    rename_map = {orig: meta["std"] for orig, meta in mapping["rename_map"].items()}
-    df = df.rename(columns=rename_map)
-
-    # Columnas monetarias estandarizadas
-    money_std_cols = sorted(set(
-        sum(mapping["income_map_std"].values(), []) +
-        sum(mapping["expense_map_std"].values(), [])
-    ))
-
-    if not money_std_cols:
-        log.warn("No se detectaron columnas monetarias. Revisa mapping_builder.")
-    else:
-        df = _clean_monetary(df, money_std_cols)
-
-    log.info(f"Escribiendo CSV limpio en: {INTERIM_CSV}")
-    df.to_csv(INTERIM_CSV, index=False)
-    log.info(f"Interim guardado (shape={df.shape})")
-
-# -------- helpers --------
-
-def _load_mapping() -> dict:
-    if not MAPPING_FILE.exists():
-        raise FileNotFoundError(f"No existe {MAPPING_FILE}. Corre: python -m src.mapping_builder")
-    return json.loads(MAPPING_FILE.read_text(encoding="utf-8"))
-
-def _read_raw() -> pd.DataFrame:
-    log.info(f"Leyendo raw: {RAW_DATA}")
-    return pd.read_csv(RAW_DATA)
-
-def _is_expense_std(col: str) -> bool:
-    # por convención en std_name: *_gas_*__
-    return "_gas_" in col
-
-def _winsorize(s: pd.Series, lower=0.0, upper=0.99) -> pd.Series:
-    s2 = pd.to_numeric(s, errors="coerce")
-    if s2.dropna().empty:
-        return s2
-    lo, hi = s2.quantile(lower), s2.quantile(upper)
-    return s2.clip(lower=lo, upper=hi)
-
-def _clean_monetary(df: pd.DataFrame, money_cols: list[str]) -> pd.DataFrame:
-    for c in money_cols:
-        s = pd.to_numeric(df.get(c), errors="coerce")
-        if _is_expense_std(c):
-            s = s.abs()
-        s = _winsorize(s, upper=0.99).fillna(0.0)
-        df[c] = s
+def clean_data():
+    # Cambiar: Leemos el archivo en process_mapping() y solo obtenemos el DataFrame limpio.
+    df = process_mapping()  # No es necesario llamar a pd.read_excel nuevamente.
+    
+    # Limpiar datos: eliminamos filas con valores nulos en los ingresos y gastos
+    df.dropna(subset=['Ingreso_Beca', 'Ingreso_Trabajo', 'Ingreso_Apoyo_Familiar', 'Total_Gastos'], inplace=True)
+    
+    # Reemplazar valores erróneos o negativos (si es necesario, por ejemplo, gastos negativos)
+    df.loc[df['Total_Ingresos'] < 0, 'Total_Ingresos'] = 0
+    df.loc[df['Total_Gastos'] < 0, 'Total_Gastos'] = 0
+    
+    # Guardamos el archivo limpio
+    cleaned_file_path = INTERIM_CSV
+    df.to_csv(cleaned_file_path, index=False)
+    
     return df
