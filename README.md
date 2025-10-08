@@ -31,7 +31,8 @@ A continuación, se enumeran las herramientas y librerías utilizadas para lleva
 - **Pandas**: Para la manipulación y análisis de datos (leer archivos CSV/Excel, limpieza de datos, etc.).
 - **Matplotlib**: Para la creación de gráficos estáticos (barras, dispersión, pie chart).
 - **Streamlit**: Para crear la interfaz de usuario interactiva, incluyendo la visualización de los gráficos y el dashboard.
-- **Plotly** (opcional si se desea usar gráficos más avanzados y dinámicos): Para la creación de gráficos interactivos.
+- **Plotly**  Para la creación de gráficos interactivos.
+- **Ngrok** para levantar servidor y mostrar las graficas como web
 
 ### **Otras herramientas**:
 
@@ -41,8 +42,8 @@ A continuación, se enumeran las herramientas y librerías utilizadas para lleva
 ## Estructura del Proyecto
 
 El proyecto está estructurado de la siguiente manera:
-
-student_finance_project/
+```text
+data_analisis_student/
 ├── data/                        # Datos crudos, procesados y finales
 │   ├── raw/                     # Datos crudos (dataset.xlsx)
 │   ├── interim/                 # Datos procesados (dataset_clean.csv)
@@ -50,7 +51,7 @@ student_finance_project/
 ├── docs/                        # Documentación y recursos adicionales
 │   └── figures/                 # Gráficos generados
 ├── src/                         # Código fuente
-│   ├── __init__.py              # Indica que es un paquete
+│   ├── __init__.py              #  falta no lo logre
 │   ├── config.py                # Configuración del proyecto (rutas, etc.)
 │   ├── data_prep.py             # Preprocesamiento de datos
 │   ├── features.py              # Generación de gráficos y análisis
@@ -61,6 +62,8 @@ student_finance_project/
 │   └── run_all.py               # Orquestador para ejecutar todo el pipeline
 ├── requirements.txt             # Dependencias del proyecto
 └── README.md                    # Este archivo
+
+
 
 
 
@@ -87,17 +90,12 @@ streamlit==1.3.0
 plotly==5.3.1
 
 
----
 
 ### **Cómo levantar el proyecto para otro usuario:**
 1. **Clonación del repositorio**: El otro usuario puede clonar el repositorio usando Git.
 2. **Creación de entorno virtual**: Para evitar conflictos de dependencias, se recomienda usar un entorno virtual (como se describe en los pasos anteriores).
 3. **Instalación de dependencias**: Una vez que el entorno esté activo, instalar las dependencias del proyecto.
 4. **Ejecutar la aplicación**: Finalmente, el usuario podrá ejecutar la aplicación con `streamlit run src/app.py`.
-
----
-
-¡Listo! Ahora el README está completo con toda la información sobre el proyecto, los archivos y cómo levantarlo. Si tienes más dudas o necesitas ajustar algo más, ¡dímelo!
 
 
 
