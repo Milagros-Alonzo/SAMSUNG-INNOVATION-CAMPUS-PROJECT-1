@@ -38,26 +38,62 @@ A continuación, se enumeran las herramientas y librerías utilizadas para lleva
 - **Jupyter Notebooks** (opcional para exploración de datos previa).
 - **VS Code o cualquier IDE de Python** para el desarrollo.
 
-## Estructura del Proyecto
+Aquí está el contenido formateado para un README bonito en GitHub:
+markdown## 📁 Estructura del Proyecto
+
+### 📝 Descripción de cada archivo
+
+| Archivo | Descripción |
+|---------|-------------|
+| `config.py` | Contiene la configuración global del proyecto, incluidas las rutas a los archivos de datos y los directorios de salida |
+| `data_prep.py` | Realiza la limpieza de datos, como eliminar valores nulos, renombrar columnas, y guardar el archivo limpio en `interim/` |
+| `features.py` | Contiene las funciones que generan los gráficos (dispersión, barras apiladas, pie chart) y los visualiza a través de Streamlit |
+| `log.py` | Implementa un sistema de logging para monitorear los pasos del pipeline |
+| `mapping_builder.py` | Realiza el mapeo de las columnas de ingreso y gasto en el dataset |
+| `data_audit.py` | Realiza una auditoría de los datos procesados, mostrando las estadísticas y las columnas utilizadas |
+| `app.py` | Crea la interfaz de usuario interactiva utilizando Streamlit, mostrando un landing page y el dashboard |
+| `run_all.py` | Orquestador para ejecutar todo el pipeline de procesamiento de datos y generación de gráficos |
+
+
+## 📦 Requerimientos
+
+A continuación se muestra el archivo `requirements.txt`, que contiene todas las dependencias necesarias para levantar el proyecto:
+```txt
+pandas==1.3.3
+matplotlib==3.4.3
+streamlit==1.3.0
+plotly==5.3.1
+```
+
+**Mejoras aplicadas:**
+- ✅ Emojis para hacer el README más atractivo y visual
+- ✅ Tabla para la descripción de archivos (más ordenado)
+- ✅ Separadores horizontales (`---`) para dividir secciones
+- ✅ Numeración con emojis en las instrucciones
+- ✅ Bloques de código correctamente formateados
+- ✅ Estructura jerárquica clara con encabezados apropiados
 
 El proyecto está estructurado de la siguiente manera:
-
+```text
 student_finance_project/
-├── data/
-│ ├── raw/ # Datos crudos (dataset.xlsx)
-│ ├── interim/ # Datos procesados (dataset_clean.csv)
-│ └── processed/ # Datos finales procesados
-├── docs/ # Documentación y recursos adicionales
-│ └── figures/ # Gráficos generados
-├── src/ # Código fuente
-│ ├── init.py # Indica que es un paquete
-│ ├── config.py # Configuración del proyecto (rutas, etc.)
-│ ├── data_prep.py # Preprocesamiento de datos
-│ ├── features.py # Generación de gráficos y análisis
-│ ├── log.py # Sistema de logging
-│ ├── mapping_builder.py # Mapeo de columnas
-│ ├── data_audit.py # Auditoría de datos
-│ ├── app.py # Streamlit app (landing page + dashboard)
-│ └── run_all.py # Orquestador para ejecutar todo el pipeline
-├── requirements.txt # Dependencias del proyecto
-└── README.md # Este archivo
+├── data/                        # Datos crudos, procesados y finales
+│   ├── raw/                     # Datos crudos (dataset.xlsx)
+│   ├── interim/                 # Datos procesados (dataset_clean.csv)
+│   └── processed/               # Datos finales procesados
+├── docs/                        # Documentación y recursos adicionales
+│   └── figures/                 # Gráficos generados
+├── src/                         # Código fuente
+│   ├── __init__.py              # Indica que es un paquete
+│   ├── config.py                # Configuración del proyecto (rutas, etc.)
+│   ├── data_prep.py             # Preprocesamiento de datos
+│   ├── features.py              # Generación de gráficos y análisis
+│   ├── log.py                   # Sistema de logging
+│   ├── mapping_builder.py       # Mapeo de columnas
+│   ├── data_audit.py            # Auditoría de datos
+│   ├── app.py                   # Streamlit app (landing page + dashboard)
+│   └── run_all.py               # Orquestador para ejecutar todo el pipeline
+├── requirements.txt             # Dependencias del proyecto
+└── README.md                    # Este archivo
+```
+
+
